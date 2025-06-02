@@ -1,39 +1,38 @@
-//your JS code here. If required.
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
-const circles = document.querySelectorAll(".circle");
-const progress = document.getElementById("progress");
+const circles = document.querySelectorAll('.circle');
+const progress = document.getElementById('progress');
+const nextBtn = document.getElementById('next');
+const prevBtn = document.getElementById('prev');
 
 let currentStep = 1;
 
-next.addEventListener("click", () => {
+nextBtn.addEventListener('click', () => {
   currentStep++;
   if (currentStep > circles.length) {
     currentStep = circles.length;
   }
-  updateProgress();
+  update();
 });
 
-prev.addEventListener("click", () => {
+prevBtn.addEventListener('click', () => {
   currentStep--;
   if (currentStep < 1) {
     currentStep = 1;
   }
-  updateProgress();
+  update();
 });
 
-function updateProgress() {
+function update() {
   circles.forEach((circle, index) => {
     if (index < currentStep) {
-      circle.classList.add("active");
+      circle.classList.add('active');
     } else {
-      circle.classList.remove("active");
+      circle.classList.remove('active');
     }
   });
 
   const progressPercent = ((currentStep - 1) / (circles.length - 1)) * 100;
-  progress.style.width = `${progressPercent}%`;
+  progress.style.width = progressPercent + '%';
 
-  prev.disabled = currentStep === 1;
-  next.disabled = currentStep === circles.length;
+  prevBtn.disabled = currentStep === 1;
+  nextBtn.disabled = currentStep === circles.length;
 }
